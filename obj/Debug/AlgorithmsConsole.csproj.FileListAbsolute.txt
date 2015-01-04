@@ -1,0 +1,6 @@
+C:\Users\PrashMaya\Documents\Algorithms\AlgorithmsConsole\bin\Debug\AlgorithmsConsole.exe.config
+C:\Users\PrashMaya\Documents\Algorithms\AlgorithmsConsole\bin\Debug\AlgorithmsConsole.exe
+C:\Users\PrashMaya\Documents\Algorithms\AlgorithmsConsole\bin\Debug\AlgorithmsConsole.pdb
+C:\Users\PrashMaya\Documents\Algorithms\AlgorithmsConsole\obj\Debug\AlgorithmsConsole.csprojResolveAssemblyReference.cache
+C:\Users\PrashMaya\Documents\Algorithms\AlgorithmsConsole\obj\Debug\AlgorithmsConsole.exe
+C:\Users\PrashMaya\Documents\Algorithms\AlgorithmsConsole\obj\Debug\AlgorithmsConsole.pdb
