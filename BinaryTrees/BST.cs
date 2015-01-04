@@ -31,6 +31,13 @@ namespace AlgorithmsConsole.BinaryTrees
             }
         }
 
+        public static void InOrderIterative(BST tree)
+        {
+            if (tree == null)
+                return;
+
+        }
+
         public static void PreOrderIterative(BST tree)
         {
             Stack<BST> stack = new Stack<BST>();
