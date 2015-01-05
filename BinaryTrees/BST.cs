@@ -81,14 +81,44 @@ namespace AlgorithmsConsole.BinaryTrees
             Stack<BST> stack = new Stack<BST>();
         }
 
+        // Push everything to a queue dequeue the queue and then push it to a stack and then print the stack
+        public static void LevelOrderInReverseTraversal(BST tree)
+        {
+            Queue<BST> queue = new Queue<BST>();
+            Stack<BST> stack = new Stack<BST>();
+            if (tree == null)
+                return;
+            queue.Enqueue(tree);
+            while (queue.Count() > 0)
+            {
+                var temp = queue.Dequeue();
+                if (temp.right != null)
+                {
+                    queue.Enqueue(temp.right);
+                }
+                if (temp.left != null)
+                {
+                    queue.Enqueue(temp.left);
+                }
+                stack.Push(temp);
+            }
+
+            while (stack.Count() > 0)
+            {
+                var another = stack.Pop();
+                Console.WriteLine(another._data);
+            }
+            
+        }
+
         // Level Order Traversal
-        public static void LevelOrderTraversal(BST tree)
+        public static Queue<BST> LevelOrderTraversal(BST tree)
         {
             Queue<BST> queue = new Queue<BST>();
 
             // Logic being first push the current node down the queue, then push its left child and then right child
             if (tree == null)
-                return;
+                return queue;
             queue.Enqueue(tree);
             while (queue.Count() > 0)
             {
@@ -99,6 +129,7 @@ namespace AlgorithmsConsole.BinaryTrees
                 if (current.right != null)
                     queue.Enqueue(current.right);
             }
+            return queue;
         }
 
         // Given a Binary Tree find the maximum element in a non recursive fashion

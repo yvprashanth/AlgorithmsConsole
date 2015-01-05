@@ -34,8 +34,9 @@ namespace AlgorithmsConsole
 
             //BST.InOrderIterative(tree);
 
-            BST.NoOfLeaves(tree);
-            BST.LevelOrderTraversal(tree);
+            //BST.NoOfLeaves(tree);
+            //BST.LevelOrderTraversal(tree);
+            BST.LevelOrderInReverseTraversal(tree);
         }
     }
 }
