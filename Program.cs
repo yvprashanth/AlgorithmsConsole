@@ -17,7 +17,7 @@ namespace AlgorithmsConsole
             //test = BST.Insert(test, 2);
             //test = BST.Insert(test, 20);
 
-            BST tree = BST.Build(5);
+            BST tree = BST.Build(8);
             //BST.InOrderRecursive(tree);
             //Console.WriteLine("Iterative");
             //BST.InOrderIterative(tree);
@@ -32,7 +32,9 @@ namespace AlgorithmsConsole
             //int minValue = BST.minValue(tree);
             //int maxValue = BST.maxValue(tree);
 
+            //BST.InOrderIterative(tree);
 
+            BST.NoOfLeaves(tree);
             BST.LevelOrderTraversal(tree);
         }
     }

@@ -31,13 +31,6 @@ namespace AlgorithmsConsole.BinaryTrees
             }
         }
 
-        public static void InOrderIterative(BST tree)
-        {
-            if (tree == null)
-                return;
-
-        }
-
         public static void PreOrderIterative(BST tree)
         {
             Stack<BST> stack = new Stack<BST>();
@@ -54,31 +47,57 @@ namespace AlgorithmsConsole.BinaryTrees
             }
         }
 
+
+        // Give an algorithm for finding the number of leaves in a binary tree without using recursion
+        public static int NoOfLeaves(BST tree)
+        {
+            if (tree == null)
+                return 0;
+            int count = 0;
+
+            // In this case there are 0 leaves
+            if (tree.left == null && tree.right == null)
+                return 0;
+            Queue<BST> queue = new Queue<BST>();
+            queue.Enqueue(tree);
+
+            while (queue.Count() > 0)
+            {
+                BST current = queue.Dequeue();
+                if (current.left == null && current.right == null)
+                    count += 1;
+                if (current.left != null)
+                    queue.Enqueue(current.left);
+                if (current.right != null)
+                    queue.Enqueue(current.right);
+            }
+            queue.Clear();
+            return count;
+        }
+
         // Post Order is Left, Right, Root
         public static void PostOrderIterative(BST tree)
         {
             Stack<BST> stack = new Stack<BST>();
         }
 
+        // Level Order Traversal
         public static void LevelOrderTraversal(BST tree)
         {
             Queue<BST> queue = new Queue<BST>();
+
+            // Logic being first push the current node down the queue, then push its left child and then right child
             if (tree == null)
                 return;
-            else
+            queue.Enqueue(tree);
+            while (queue.Count() > 0)
             {
-                queue.Enqueue(tree);
-                // While queue is not empty
-                while (queue.Count() > 0)
-                {
-                    var temp = queue.Dequeue();
-                    Console.Write(temp._data);
-                    Console.Write(",");
-                    if (temp.left != null)
-                        queue.Enqueue(temp.left);
-                    if (temp.right != null)
-                        queue.Enqueue(temp.right);
-                }
+                BST current = queue.Dequeue();
+                Console.WriteLine(current._data);
+                if (current.left != null)
+                    queue.Enqueue(current.left);
+                if (current.right != null)
+                    queue.Enqueue(current.right);
             }
         }
 
@@ -104,28 +123,28 @@ namespace AlgorithmsConsole.BinaryTrees
 
         public static void InOrderIterative(BST tree)
         {
-            BST current;
+            BST current = tree;
             if (tree == null)
                 return;
             Stack<BST> stack = new Stack<BST>();
-            current = tree;
-
+            
+            // Push all the way to the left
             while (current != null)
             {
                 stack.Push(current);
                 current = current.left;
             }
 
-            while (stack.Count() != 0)
+            // Now find the next node
+            while (stack.Count() > 0)
             {
                 BST temp = stack.Pop();
                 Console.WriteLine(temp._data);
 
-                // Find the next node
                 if (temp.right != null)
                 {
                     temp = temp.right;
-                    // The next node to be visited is the leftmost
+
                     while (temp != null)
                     {
                         stack.Push(temp);
