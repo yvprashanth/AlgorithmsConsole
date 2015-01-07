@@ -31,6 +31,32 @@ namespace AlgorithmsConsole.BinaryTrees
             }
         }
 
+        public static bool IsMirror(BST tree1, BST tree2)
+        {
+            if (tree1 == null && tree2 == null)
+                return true;
+            if(tree1 == null || tree2 == null)
+                return false;
+            if(tree1._data != tree2._data)
+                return false;
+            return IsMirror(tree1.left, tree1.right) && IsMirror(tree1.right, tree2.left);
+        }
+
+        public static BST MirrorOfTree(BST tree)
+        {
+            BST mirror = new BST(tree._data);
+            BST current = tree;
+            if (current != null)
+            {
+                if(current.left != null)
+                    mirror.left = current.left;
+                if (current.right != null)
+                    mirror.right = current.right;
+            }
+
+            return mirror;
+        }
+
         public static void PreOrderIterative(BST tree)
         {
             Stack<BST> stack = new Stack<BST>();
@@ -81,6 +107,47 @@ namespace AlgorithmsConsole.BinaryTrees
             Stack<BST> stack = new Stack<BST>();
         }
 
+        public static void ZigZagTraversal(BST tree)
+        {
+            Queue<BST> queue = new Queue<BST>();
+            Stack<BST> stack = new Stack<BST>();
+            if (tree == null)
+                return;
+            int count = 0;
+            queue.Enqueue(tree);
+            count++;
+            while (queue.Count() > 0)
+            {
+                
+
+
+                
+                // Even means insert left to right
+                if (count % 2 == 0)
+                {
+                    // Even row means stack
+
+                    BST current = queue.Dequeue();
+                    Console.WriteLine(current._data);
+
+                    if (current.left != null)
+                        queue.Enqueue(current.left);
+                    if (current.right != null)
+                        queue.Enqueue(current.right);
+                    count++;
+                }
+                else
+                {
+                    // Odd row means add to queue
+                    if (current.right != null)
+                        queue.Enqueue(current.right);
+                    if (current.left != null)
+                        queue.Enqueue(current.left);
+                    count++;
+                }
+            }
+        }
+
         // Push everything to a queue dequeue the queue and then push it to a stack and then print the stack
         public static void LevelOrderInReverseTraversal(BST tree)
         {
@@ -108,7 +175,6 @@ namespace AlgorithmsConsole.BinaryTrees
                 var another = stack.Pop();
                 Console.WriteLine(another._data);
             }
-            
         }
 
         // Level Order Traversal
@@ -138,6 +204,12 @@ namespace AlgorithmsConsole.BinaryTrees
             // Loop through the tree in level order fashion and compare with the root
             Queue<BST> queue = new Queue<BST>();
             return 0;
+        }
+
+        // Given a Binary Tree find a particular element
+        public static bool FindElement(BST tree)
+        {
+            return false;
         }
 
         public static void InOrderRecursive(BST tree)
