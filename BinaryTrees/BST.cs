@@ -11,6 +11,93 @@ namespace AlgorithmsConsole.BinaryTrees
         int _data;
         private BST left;
         private BST right;
+
+        // Give an algorithm for finding maximum element in a tree
+        public int FindMax(BST tree)
+        {
+            int maxValue = Int32.MinValue;
+            if (tree == null)
+                return Int32.MinValue;
+            int rootValue = tree._data;
+            int maxLeftValue = FindMax(tree.left);
+            int maxRightValue = FindMax(tree.right);
+            // Find the largest of the three values
+            if (maxLeftValue > maxRightValue)
+                maxValue = maxLeftValue;
+            else maxValue = maxRightValue;
+            if (rootValue > maxValue)
+                maxValue = rootValue;
+            return maxValue;
+        }
+
+        // Give an algorithm to find max element in binary tree without recursion - do iterative traversal and check along the way if the currently visited element is the max there is
+        public int FindMaxIterativeWay(BST tree)
+        {
+            Queue<BST> queue = new Queue<BST>();
+            int maxValue = Int32.MinValue;
+            if (tree == null)
+                return Int32.MinValue;
+            queue.Enqueue(tree);
+            while (queue.Count > 0)
+            {
+                BST current = queue.Dequeue();
+                if (current._data > maxValue)
+                    maxValue = current._data;
+                if (current.left != null)
+                    queue.Enqueue(current.left);
+                if (current.right != null)
+                    queue.Enqueue(current.right);
+            }
+            return maxValue;
+        }
+
+
+        public bool FindInBinaryTreeUsingRecursion(BST tree, int data)
+        {
+            if (tree == null)
+                return false;
+            else
+            {
+                if (data == tree._data)
+                    return true;
+                else if (data < tree._data)
+                    return FindInBinaryTreeUsingRecursion(tree.left, data);
+                else if (data > tree._data)
+                    return FindInBinaryTreeUsingRecursion(tree.right, data);
+            }
+            return false;
+        }
+
+        // Level order search
+        public static bool FindInBinaryTreeUsingIteration(BST tree, int data)
+        {
+            Queue<BST> queue = new Queue<BST>();
+            if (tree == null)
+                return false;
+            else
+            {
+                queue.Enqueue(tree);
+                while (queue.Count > 0)
+                {
+                    BST current = queue.Dequeue();
+                    if (current != null)
+                    {
+                        if (data == current._data)
+                            return true;
+                        if (data < current._data)
+                            queue.Enqueue(current.left);
+                        if (data > current._data)
+                            queue.Enqueue(current.right);
+                    }
+                }
+            }
+            return false;
+        }
+
+        // Give an algorithm for inserting an element into a binary tree
+        // We can insert the node anywhere we would want to as this is not a BST
+
+
         // Initiating Constructor
         public BST(int data)
         {
@@ -107,46 +194,42 @@ namespace AlgorithmsConsole.BinaryTrees
             Stack<BST> stack = new Stack<BST>();
         }
 
-        public static void ZigZagTraversal(BST tree)
-        {
-            Queue<BST> queue = new Queue<BST>();
-            Stack<BST> stack = new Stack<BST>();
-            if (tree == null)
-                return;
-            int count = 0;
-            queue.Enqueue(tree);
-            count++;
-            while (queue.Count() > 0)
-            {
-                
+        //public static void ZigZagTraversal(BST tree)
+        //{
+        //    Queue<BST> queue = new Queue<BST>();
+        //    Stack<BST> stack = new Stack<BST>();
+        //    if (tree == null)
+        //        return;
+        //    int count = 0;
+        //    queue.Enqueue(tree);
+        //    count++;
+        //    while (queue.Count() > 0)
+        //    {                
+        //        // Even means insert left to right
+        //        if (count % 2 == 0)
+        //        {
+        //            // Even row means stack
 
+        //            BST current = queue.Dequeue();
+        //            Console.WriteLine(current._data);
 
-                
-                // Even means insert left to right
-                if (count % 2 == 0)
-                {
-                    // Even row means stack
-
-                    BST current = queue.Dequeue();
-                    Console.WriteLine(current._data);
-
-                    if (current.left != null)
-                        queue.Enqueue(current.left);
-                    if (current.right != null)
-                        queue.Enqueue(current.right);
-                    count++;
-                }
-                else
-                {
-                    // Odd row means add to queue
-                    if (current.right != null)
-                        queue.Enqueue(current.right);
-                    if (current.left != null)
-                        queue.Enqueue(current.left);
-                    count++;
-                }
-            }
-        }
+        //            if (current.left != null)
+        //                queue.Enqueue(current.left);
+        //            if (current.right != null)
+        //                queue.Enqueue(current.right);
+        //            count++;
+        //        }
+        //        else
+        //        {
+        //            // Odd row means add to queue
+        //            if (current.right != null)
+        //                queue.Enqueue(current.right);
+        //            if (current.left != null)
+        //                queue.Enqueue(current.left);
+        //            count++;
+        //        }
+        //    }
+        //}
 
         // Push everything to a queue dequeue the queue and then push it to a stack and then print the stack
         public static void LevelOrderInReverseTraversal(BST tree)

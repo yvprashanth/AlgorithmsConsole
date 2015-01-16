@@ -37,8 +37,8 @@ namespace AlgorithmsConsole
             //BST.NoOfLeaves(tree);
             //BST.LevelOrderTraversal(tree);
             //BST.LevelOrderInReverseTraversal(tree);
-
-            BST.ZigZagTraversal(tree);
+            bool result = BST.FindInBinaryTreeUsingIteration(tree, 15);
+            //BST.ZigZagTraversal(tree);
         }
     }
 }
