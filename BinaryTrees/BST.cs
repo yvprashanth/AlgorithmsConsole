@@ -94,10 +94,72 @@ namespace AlgorithmsConsole.BinaryTrees
             return false;
         }
 
+
         // Give an algorithm for inserting an element into a binary tree
-        // We can insert the node anywhere we would want to as this is not a BST
+        // We can insert the node anywhere we would want to as this is not a BST. 
+        // Wherever we find that left or right child is null we can insert
+        public static void InsertIntoNonBST(BST tree, int data)
+        {
+            if (tree == null)
+                return;
+            Queue<BST> queue = new Queue<BST>();
+            queue.Enqueue(tree);
+            while (queue.Count > 0)
+            {
+                BST current = queue.Dequeue();
+                if (current != null)
+                {
+                    if (current.left == null)
+                    {
+                        current.left = new BST(data);
+                        // Delete queue
+                        return;
+                    }
+                    else if (current.right == null)
+                    {
+                        current.right = new BST(data);
+                        // Delete queue
+                        return;
+                    }
+                    else if(current.left != null)
+                        queue.Enqueue(current.left);
+                    else if (current.right != null)
+                        queue.Enqueue(current.right);
+                }
+            }
+        }
 
 
+        // Give an algorithm for finding the size of binary tree in recursive fashion
+        public static int SizeOfBST(BST tree)
+        {
+            if (tree == null)
+                return 0;
+            return 1 + SizeOfBST(tree.left) + SizeOfBST(tree.right);
+        }
+
+        public static int SizeOfBSTNonRecursive(BST tree)
+        {
+            if (tree == null)
+                return 0;
+            Queue<BST> queue = new Queue<BST>();
+            int count = 0;
+            queue.Enqueue(tree);
+            while (queue.Count > 0)
+            {
+                BST current = queue.Dequeue();
+                count += 1;
+                if (current != null)
+                {
+                    if (current.left != null)
+                        queue.Enqueue(current.left);
+                    if (current.right != null)
+                        queue.Enqueue(current.right);
+                }
+            }
+            return count;
+        }
+            
         // Initiating Constructor
         public BST(int data)
         {
@@ -408,16 +470,16 @@ namespace AlgorithmsConsole.BinaryTrees
               return node;
         }
 
-        public static BST Insert(BST tree, int value)
+        public static BST InsertIntoBST(BST tree, int value)
         {
             if (tree == null)
                 return new BST(value);
             else
             {
                 if (value <= tree._data)
-                    tree.left = Insert(tree.left, value);
+                    tree.left = InsertIntoBST(tree.left, value);
                 else
-                    tree.right = Insert(tree.right, value);
+                    tree.right = InsertIntoBST(tree.right, value);
                 return tree;
             }
         }

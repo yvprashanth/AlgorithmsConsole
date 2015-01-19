@@ -38,6 +38,7 @@ namespace AlgorithmsConsole
             //BST.LevelOrderTraversal(tree);
             //BST.LevelOrderInReverseTraversal(tree);
             bool result = BST.FindInBinaryTreeUsingIteration(tree, 15);
+            BST.InsertIntoNonBST(tree, 20);
             //BST.ZigZagTraversal(tree);
         }
     }
