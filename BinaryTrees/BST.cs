@@ -159,6 +159,37 @@ namespace AlgorithmsConsole.BinaryTrees
             }
             return count;
         }
+
+        // Give an algorithm for printing the level order data in reverse order. 
+        // For ex the output for the below tree should be 4567231
+        public static void LevelOrderTraversalInReverse(BST tree)
+        {
+            if (tree == null)
+                return;
+            Stack<BST> stack = new Stack<BST>();
+            Queue<BST> queue = new Queue<BST>();
+            
+            queue.Enqueue(tree);
+            while (queue.Count() > 0)
+            {
+                BST current = queue.Dequeue();
+                if (current != null)
+                {
+                    if (current.right != null)
+                        queue.Enqueue(current.right);
+                    if (current.left != null)
+                        queue.Enqueue(current.left);
+                    stack.Push(current);
+                }
+            }
+
+            while(stack.Count() > 0)
+                Console.WriteLine(stack.Pop()._data);
+        }
+
+
+        // Give an algorithm for deleting a tree
+
             
         // Initiating Constructor
         public BST(int data)
