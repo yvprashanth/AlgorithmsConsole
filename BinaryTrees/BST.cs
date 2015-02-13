@@ -30,6 +30,19 @@ namespace AlgorithmsConsole.BinaryTrees
             return maxValue;
         }
 
+        // Given an sorted array create a binary search tree with minimal height
+        public static BST CreateBSTFromSortedArray(int[] array, int lower, int higher)
+        {
+            if (lower > higher)
+                return null;
+            // start from the middle
+            int middle = (lower + higher)/2;
+            BST result = new BST(middle);
+            result.left = CreateBSTFromSortedArray(array, lower, middle - 1);
+            result.right = CreateBSTFromSortedArray(array, middle + 1, higher);
+            return result;
+        }
+
         // Give an algorithm to find max element in binary tree without recursion - do iterative traversal and check along the way if the currently visited element is the max there is
         public int FindMaxIterativeWay(BST tree)
         {
@@ -187,10 +200,75 @@ namespace AlgorithmsConsole.BinaryTrees
                 Console.WriteLine(stack.Pop()._data);
         }
 
-
         // Give an algorithm for deleting a tree
+        public static void DeleteTree(BST tree)
+        {
+            // Deleting via Post Order Traversal 
+            if (tree == null)
+                return;
+            if(tree.left != null)
+                DeleteTree(tree.left);
+            if (tree.right != null)
+                DeleteTree(tree.right);
+            // C++ Free
+            // free(tree);
+        }
 
-            
+        // Give an algorithm for finding the height of a tree
+        public static int Height(BST tree)
+        {
+            int max = 0;
+            if (tree == null)
+                return 0;
+            else
+            {
+                int left = Height(tree.left);
+                int right = Height(tree.right);
+                if (left > right)
+                    max = left;
+                else
+                    max = right;
+                return max + 1;
+            }
+        }
+
+        public static BST GenerateRandomTree(int numberOfNodes)
+        {
+            Random rand = new Random();
+            BST tree = new BST(rand.Next());
+            for (int i = 0; i < numberOfNodes; i++)
+                InsertIntoBST(tree, rand.Next());
+            return tree;
+        }
+
+        // Give an algorithm for finding the height of a tree without recursion
+        public static int HeightNonRecursion(BST tree)
+        {
+            int max = 0;
+            Queue<BST> queue = new Queue<BST>();
+            int height = 0;
+            if (tree != null)
+            {
+                queue.Enqueue(tree);
+                //height++;
+            }
+            while (queue.Count() > 0)
+            {
+                BST current = queue.Dequeue();
+                if (current != null)
+                {
+                    if (current.left != null)
+                        queue.Enqueue(current.left);
+                    if (current.right != null)
+                        queue.Enqueue(current.right);
+                    if(current.left != null || current.right != null)
+                        height++;
+                }
+
+            }
+            return height;
+        }
+
         // Initiating Constructor
         public BST(int data)
         {
